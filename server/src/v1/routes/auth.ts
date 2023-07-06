@@ -14,6 +14,8 @@ dotenv.config()
 
 router.post(
     "/register",
+    body("email")
+        .isEmail(),
     body("username")
         .isLength({ min: 5 })
         .withMessage("ユーザー名は5文字以上で入力してください。"),
@@ -23,10 +25,10 @@ router.post(
     body("confirmPassword")
         .isLength({ min: 8 })
         .withMessage("確認用パスワードは8文字以上で入力してください。"),
-    body("username").custom(async (value) => {
-        return await User.findOne({ username: value }).then((user: any) => {
+    body("email").custom(async (value) => {
+        return await User.findOne({ email: value }).then((user: any) => {
             if (user) {
-                return Promise.reject("ユーザー名は既に使用されています。");
+                return Promise.reject("このメールアドレスは既に登録されています。");
             }
         })
     }),
@@ -34,9 +36,23 @@ router.post(
     userController.register
 );
 
-//ログインAPI
+//メールログインAPI
 router.post(
     "/login",
+
+    body("email")
+        .isEmail(),
+    body("password")
+        .isLength({ min: 8 })
+        .withMessage("パスワードは8文字以上で入力してください。"),
+    validation.validate,
+    userController.login
+)
+
+//ユーザーネームログインAPI
+router.post(
+    "/login-username",
+
     body("username")
         .isLength({ min: 5 })
         .withMessage("ユーザー名は5文字以上で入力してください。"),
@@ -44,7 +60,7 @@ router.post(
         .isLength({ min: 8 })
         .withMessage("パスワードは8文字以上で入力してください。"),
     validation.validate,
-    userController.login
+    userController.loginUsername
 )
 
 //JWT認証API

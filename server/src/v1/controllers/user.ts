@@ -29,16 +29,59 @@ exports.register = async (req: express.Request, res: express.Response) => {
 };
 
 exports.login = async (req: express.Request, res: express.Response) => {
+    const { email, password } = req.body;
+
+    try {
+        // メールアドレスの一致するユーザーを検索
+        const user = await User.findOne({ email: email });
+        if (!user) {
+            res.status(401).json({
+                errors: {
+                    param: "email",
+                    message: "メールアドレスが無効です",
+                }
+            })
+        }
+        // パスワードの復号化
+        const decryptedPassword = CryptoJS.AES.decrypt(
+            user.password,
+            process.env.SECRET_KEY || ""
+        ).toString(CryptoJS.enc.Utf8);
+
+        if (decryptedPassword !== password) {
+            return res.status(401).json({
+                errors: {
+                    param: "password",
+                    message: "パスワードが無効です",
+                }
+            })
+        }
+        //JWTの発行
+        const accessToken = JWT.sign({
+            id: user._id,
+        },
+            process.env.JWT_SECRET_KEY, {
+            expiresIn: "24h",
+        });
+
+        return res.status(201).json({ user, accessToken });
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+}
+
+
+exports.loginUsername = async (req: express.Request, res: express.Response) => {
     const { username, password } = req.body;
 
     try {
-        // ユーザー名が一致するユーザーを検索
+        // メールアドレスの一致するユーザーを検索
         const user = await User.findOne({ username: username });
         if (!user) {
             res.status(401).json({
                 errors: {
                     param: "username",
-                    message: "ユーザー名が一致しません。",
+                    message: "ユーザー名が無効です",
                 }
             })
         }
