@@ -67,7 +67,7 @@ router.post(
     "/verify-token",
     tokenHandler.verifyToken,
     async (req: any, res: express.Response) => {
-        return res.status(200).json({ user: req.user });
+        return res.status(200).json({ email: req.email });
     });
 
 module.exports = router;
