@@ -89,7 +89,7 @@ const RegisterForm: FC = () => {
     }
     return (
         <Box component="form" onSubmit={handleSubmit} noValidate>
-            <Button component={Link} to="../register">
+            <Button component={Link} to="/register">
                 <ArrowBackIosNewIcon />
             </Button>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

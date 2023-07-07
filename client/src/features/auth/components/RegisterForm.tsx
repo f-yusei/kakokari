@@ -12,7 +12,7 @@ const RegisterForm: FC = () => {
             <Button
                 variant='outlined'
                 style={{ borderColor: 'black', color: 'black' }}
-                component={Link} to="/auth/mail"
+                component={Link} to="/mail-register"
             >
                 メールアドレスで登録
             </Button>
@@ -21,7 +21,7 @@ const RegisterForm: FC = () => {
             <Button variant='outlined'>Appleで登録</Button>
             <p style={{ fontSize: "0.7rem" }}>利用規約やプライバシーポリシーに同意の上、登録又はログインへお進みください</p>
             <div>アカウントをお持ちの方</div>
-            <Button variant='outlined' component={Link} to="/auth/login">ログイン</Button>
+            <Button variant='outlined' component={Link} to="/login">ログイン</Button>
         </Box >
     )
 }
