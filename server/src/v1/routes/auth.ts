@@ -15,10 +15,8 @@ dotenv.config()
 router.post(
     "/register",
     body("email")
-        .isEmail(),
-    body("username")
-        .isLength({ min: 5 })
-        .withMessage("ユーザー名は5文字以上で入力してください。"),
+        .isEmail()
+        .withMessage("メールアドレスの形式が正しくありません。"),
     body("password")
         .isLength({ min: 8 })
         .withMessage("パスワードは8文字以上で入力してください。"),
