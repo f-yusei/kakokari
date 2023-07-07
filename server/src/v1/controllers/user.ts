@@ -15,14 +15,14 @@ exports.register = async (req: express.Request, res: express.Response) => {
         ).toString();
         const user = await User.create(req.body);
         //JWTの発行
-        const accessToken = JWT.sign({
+        const token = JWT.sign({
             id: user._id,
         },
             process.env.JWT_SECRET_KEY, {
             expiresIn: "24h",
         }
         )
-        return res.status(200).json({ user, accessToken });
+        return res.status(200).json({ user, token });
     } catch (err) {
         return res.status(500).json(err);
     }

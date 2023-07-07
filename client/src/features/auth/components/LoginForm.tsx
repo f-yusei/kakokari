@@ -1,6 +1,6 @@
 import { Box, Button } from '@mui/material'
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 const LoginForm = () => {
     const navigate = useNavigate()
@@ -10,7 +10,7 @@ const LoginForm = () => {
             <Button
                 variant='outlined'
                 style={{ borderColor: 'black', color: 'black' }}
-                onClick={() => navigate('/auth/mail')}
+                component={Link} to="/auth/mail"
             >
                 メールアドレスでログイン
             </Button>
@@ -19,7 +19,7 @@ const LoginForm = () => {
             <Button variant='outlined'>Appleでログイン</Button>
             <p style={{ fontSize: "0.7rem" }}>利用規約やプライバシーポリシーに同意の上、登録又はログインへお進みください</p>
             <div>アカウントをお持ちでない方</div>
-            <Button variant='outlined' onClick={() => navigate('/auth/register')}>新規登録</Button >
+            <Button component={Link} to="/auth/register" variant='outlined' >新規登録</Button >
         </Box >
     )
 }
