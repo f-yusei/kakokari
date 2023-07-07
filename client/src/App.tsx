@@ -5,23 +5,25 @@ import LoginForm from './features/auth/components/LoginForm';
 import RegisterForm from './features/auth/components/RegisterForm';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
-import { red } from '@mui/material/colors';
+import { red, pink } from '@mui/material/colors';
 import MailRegisterForm from './features/auth/components/MailRegisterForm';
 import MailLoginForm from './features/auth/components/MailLoginForm';
 import MainLayout from './components/layout/MainLayout';
 import Home from './components/layout/Home';
+import BasicAppBar from './components/common/AppBar';
 
 function App() {
 
   const theme = createTheme({
     palette: {
-      primary: red
+      primary: pink
     }
   })
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <BasicAppBar />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<AuthLayout />}>

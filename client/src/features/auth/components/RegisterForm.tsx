@@ -1,11 +1,10 @@
 import { FC } from 'react'
 import { Button, Box } from '@mui/material'
-import { useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 
 const RegisterForm: FC = () => {
-    const navigate = useNavigate()
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <h3>新規登録</h3>
