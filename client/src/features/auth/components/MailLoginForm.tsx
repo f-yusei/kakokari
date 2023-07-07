@@ -8,12 +8,11 @@ import React, { FC } from 'react';
 
 
 
-const RegisterForm: FC = () => {
+const MailLoginForm: FC = () => {
     const navigate = useNavigate()
 
     const [emailErrText, setEmailErrText] = React.useState<string>('')
     const [passwordErrText, setPasswordErrText] = React.useState<string>('')
-    const [confirmPasswordErrText, setConfirmPasswordErrText] = React.useState<string>('')
 
     const [loading, setLoading] = React.useState<boolean>(false)
 
@@ -21,16 +20,13 @@ const RegisterForm: FC = () => {
         e.preventDefault();
         setEmailErrText('');
         setPasswordErrText('');
-        setConfirmPasswordErrText('');
 
         //フォームの値を取得
         const data = await new FormData(e.currentTarget);
         const email = (data.get('email') as string).trim();
         const password = (data.get('password') as string).trim();
-        const confirmPassword = (data.get('confirmPassword') as string).trim();
         console.log(email)
         console.log(password)
-        console.log(confirmPassword)
 
         let error = false;
 
@@ -42,14 +38,6 @@ const RegisterForm: FC = () => {
             error = true;
             setPasswordErrText('パスワードを入力してください')
         }
-        if (confirmPassword === '') {
-            error = true;
-            setConfirmPasswordErrText('パスワードを入力してください')
-        }
-        if (password !== confirmPassword) {
-            error = true;
-            setConfirmPasswordErrText('パスワードが一致しません')
-        }
         if (error) {
             return;
         }
@@ -57,43 +45,36 @@ const RegisterForm: FC = () => {
         setLoading(true);
         //登録APIを叩く
         try {
-            const res = await authApi.register({
+            const res = await authApi.login({
                 email,
                 password,
-                confirmPassword
             });
             setLoading(false);
-            localStorage.setItem('token', res.data.token);
-            console.log("新規登録成功！")
+            console.log("ログイン成功！")
             navigate('/')
 
         } catch (err: any) {
             console.log(err)
             const errors = err.data.error;
             console.log(errors);
-            if (errors) {
-                errors.forEach((error: any) => {
-                    if (error.path === 'email') {
-                        setEmailErrText(error.msg);
-                    }
-                    if (error.path === 'password') {
-                        setPasswordErrText(error.msg);
-                    }
-                    if (error.path === 'confirmPassword') {
-                        setConfirmPasswordErrText(error.msg);
-                    }
-                })
-            }
+            errors.forEach((error: any) => {
+                if (error.param === 'email') {
+                    setEmailErrText(error.msg);
+                }
+                if (error.param === 'password') {
+                    setPasswordErrText(error.msg);
+                }
+            })
             setLoading(false);
         }
     }
     return (
         <Box component="form" onSubmit={handleSubmit} noValidate>
-            <Button component={Link} to="../register">
+            <Button component={Link} to="../login">
                 <ArrowBackIosNewIcon />
             </Button>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <h3>会員登録</h3>
+                <h3>ログイン</h3>
                 <TextField
                     id='email'
                     label="メールアドレス"
@@ -118,18 +99,6 @@ const RegisterForm: FC = () => {
                     error={passwordErrText !== ''}
                     disabled={loading}
                 />
-                <TextField
-                    id='confirmPassword'
-                    label="パスワード(確認用)"
-                    fullWidth
-                    margin='normal'
-                    name='confirmPassword'
-                    type='password'
-                    required
-                    helperText={confirmPasswordErrText}
-                    error={confirmPasswordErrText !== ''}
-                    disabled={loading}
-                />
                 <LoadingButton
                     variant='contained'
                     type='submit'
@@ -142,4 +111,4 @@ const RegisterForm: FC = () => {
     )
 }
 
-export default RegisterForm
+export default MailLoginForm

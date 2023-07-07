@@ -10,7 +10,7 @@ const LoginForm = () => {
             <Button
                 variant='outlined'
                 style={{ borderColor: 'black', color: 'black' }}
-                component={Link} to="/auth/mail"
+                component={Link} to="/auth/mail-login"
             >
                 メールアドレスでログイン
             </Button>

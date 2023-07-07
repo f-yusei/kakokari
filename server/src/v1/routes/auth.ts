@@ -39,7 +39,8 @@ router.post(
     "/login",
 
     body("email")
-        .isEmail(),
+        .isEmail()
+        .withMessage("メールアドレスの形式が正しくありません。"),
     body("password")
         .isLength({ min: 8 })
         .withMessage("パスワードは8文字以上で入力してください。"),

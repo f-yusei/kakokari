@@ -7,7 +7,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import { red } from '@mui/material/colors';
 import MailRegisterForm from './features/auth/components/MailRegisterForm';
-
+import MailLoginForm from './features/auth/components/MailLoginForm';
 
 function App() {
 
@@ -25,7 +25,8 @@ function App() {
           <Route path="/auth" element={<AuthLayout />}>
             <Route path="login" element={<LoginForm />} />
             <Route path="register" element={<RegisterForm />} />
-            <Route path="mail" element={<MailRegisterForm />} />
+            <Route path="mail-register" element={<MailRegisterForm />} />
+            <Route path="mail-login" element={<MailLoginForm />} />
           </Route>
         </Routes>
       </BrowserRouter >

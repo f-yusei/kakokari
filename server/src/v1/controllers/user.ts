@@ -36,10 +36,10 @@ exports.login = async (req: express.Request, res: express.Response) => {
         const user = await User.findOne({ email: email });
         if (!user) {
             res.status(401).json({
-                errors: {
+                error: [{
                     param: "email",
                     message: "メールアドレスが無効です",
-                }
+                }]
             })
         }
         // パスワードの復号化
@@ -50,10 +50,10 @@ exports.login = async (req: express.Request, res: express.Response) => {
 
         if (decryptedPassword !== password) {
             return res.status(401).json({
-                errors: {
+                error: [{
                     param: "password",
                     message: "パスワードが無効です",
-                }
+                }]
             })
         }
         //JWTの発行
@@ -79,10 +79,10 @@ exports.loginUsername = async (req: express.Request, res: express.Response) => {
         const user = await User.findOne({ username: username });
         if (!user) {
             res.status(401).json({
-                errors: {
+                error: [{
                     param: "username",
                     message: "ユーザー名が無効です",
-                }
+                }]
             })
         }
         // パスワードの復号化
@@ -93,10 +93,10 @@ exports.loginUsername = async (req: express.Request, res: express.Response) => {
 
         if (decryptedPassword !== password) {
             return res.status(401).json({
-                errors: {
+                error: [{
                     param: "password",
                     message: "パスワードが無効です",
-                }
+                }]
             })
         }
         //JWTの発行
