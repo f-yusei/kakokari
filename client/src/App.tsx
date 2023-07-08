@@ -10,7 +10,7 @@ import MailRegisterForm from './features/auth/components/MailRegisterForm';
 import MailLoginForm from './features/auth/components/MailLoginForm';
 import MainLayout from './components/layout/MainLayout';
 import Home from './components/layout/Home';
-import BasicAppBar from './components/common/AppBar';
+import CommonAppBar from './components/common/AppBar';
 
 function App() {
 
@@ -23,8 +23,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BasicAppBar />
+
       <BrowserRouter>
+        <CommonAppBar />
         <Routes>
           <Route path="/" element={<AuthLayout />}>
             <Route path="login" element={<LoginForm />} />

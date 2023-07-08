@@ -1,24 +1,46 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
+import { Route, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { Icon } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 
-export default function BasicAppBar() {
+function CommonAppBar() {
+
+    const location = useLocation();
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static" sx={{ backgroundColor: "white" }}>
                 <Toolbar>
-                    <Icon>
+                    <IconButton onClick={() => {
+                        window.location.href = "/"
+                    }}>
                         <CardGiftcardIcon sx={{ color: "black" }} />
-                    </Icon>
+                    </IconButton>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: "black" }}>
                         kakokari
                     </Typography>
+                    {location.pathname !== '/register' && location.pathname !== '/login' && (
+                        <>
+
+                            <Button onClick={() => {
+                                window.location.href = "/login"
+                            }
+                            }>ログイン</Button>
+                            <Button onClick={() => {
+                                window.location.href = "/register"
+                            }
+                            }
+                            >新規登録</Button>
+                        </>
+                    )}
                 </Toolbar>
             </AppBar>
         </Box>
     );
 }
+
+export default CommonAppBar;
