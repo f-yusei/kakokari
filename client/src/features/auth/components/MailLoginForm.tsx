@@ -70,7 +70,7 @@ const MailLoginForm: FC = () => {
     }
     return (
         <Box component="form" onSubmit={handleSubmit} noValidate>
-            <Button component={Link} to="/login">
+            <Button component={Link} to="/login" sx={{ mt: 2 }}>
                 <ArrowBackIosNewIcon />
             </Button>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
