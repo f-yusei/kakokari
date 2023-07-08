@@ -1,6 +1,6 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-import { Route, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -23,9 +23,8 @@ function CommonAppBar() {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: "black" }}>
                         kakokari
                     </Typography>
-                    {location.pathname !== '/register' && location.pathname !== '/login' && (
+                    {location.pathname !== '/register' && location.pathname !== '/login' && location.pathname !== '/mail-login' && location.pathname !== '/mail-register' && (
                         <>
-
                             <Button onClick={() => {
                                 window.location.href = "/login"
                             }
