@@ -48,19 +48,6 @@ router.post(
     userController.login
 )
 
-//ユーザーネームログインAPI
-router.post(
-    "/login-username",
-
-    body("username")
-        .isLength({ min: 5 })
-        .withMessage("ユーザー名は5文字以上で入力してください。"),
-    body("password")
-        .isLength({ min: 8 })
-        .withMessage("パスワードは8文字以上で入力してください。"),
-    validation.validate,
-    userController.loginUsername
-)
 
 //JWT認証API
 router.post(
