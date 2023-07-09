@@ -1,8 +1,12 @@
-import React from 'react'
+import Tabs from "../common/Tabs"
+
+
 
 const Home = () => {
     return (
-        <div>Home</div>
+        <div>
+            <Tabs />
+        </div>
     )
 }
 
