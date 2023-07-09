@@ -15,7 +15,7 @@ function CustomTabPanel(props: TabPanelProps) {
         <div
             role="tabpanel"
             hidden={value !== index}
-            id={`simple-tabpanel-${index}`}
+            id={`tabpanel-${index}`}
             aria-labelledby={`simple-tab-${index}`}
             {...other}
         >
@@ -31,7 +31,7 @@ function CustomTabPanel(props: TabPanelProps) {
 function a11yProps(index: number) {
     return {
         id: `simple-tab-${index}`,
-        'aria-controls': `simple-tabpanel-${index}`,
+        'aria-controls': `tabpanel-${index}`,
     };
 }
 
@@ -45,10 +45,10 @@ export default function Tabs() {
     return (
         <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <MultiTab value={value} onChange={handleChange} aria-label="basic tabs example">
-                    <Tab label="Item One" {...a11yProps(0)} />
-                    <Tab label="Item Two" {...a11yProps(1)} />
-                    <Tab label="Item Three" {...a11yProps(2)} />
+                <MultiTab value={value} onChange={handleChange} aria-label="tabs">
+                    <Tab label="おすすめ" {...a11yProps(0)} />
+                    <Tab label="マイリスト" {...a11yProps(1)} />
+                    <Tab label="ピックアップ" {...a11yProps(2)} />
                 </MultiTab>
             </Box>
             <CustomTabPanel value={value} index={0}>

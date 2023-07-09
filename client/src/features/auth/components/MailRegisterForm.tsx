@@ -63,6 +63,7 @@ const RegisterForm: FC = () => {
                 confirmPassword
             });
             setLoading(false);
+            console.log(res)
             localStorage.setItem('token', res.data.accessToken);
             console.log("新規登録成功！")
             navigate('/')
