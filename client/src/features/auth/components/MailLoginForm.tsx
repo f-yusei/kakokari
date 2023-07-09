@@ -50,6 +50,7 @@ const MailLoginForm: FC = () => {
                 password,
             });
             setLoading(false);
+            localStorage.setItem('token', res.data.accessToken);
             console.log("ログイン成功！")
             navigate('/')
 
