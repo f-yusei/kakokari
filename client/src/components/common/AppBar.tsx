@@ -11,7 +11,7 @@ function CommonAppBar() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" sx={{ backgroundColor: "white" }}>
+            <AppBar position="static" sx={{ backgroundColor: "white", height: "4rem" }}>
                 <Toolbar>
                     <IconButton onClick={() => {
                         window.location.href = "/"
@@ -22,17 +22,19 @@ function CommonAppBar() {
                         kakokari
                     </Typography>
                     //TODO ログイン状態によって表示を変える
-                    <>
-                        <Button onClick={() => {
+                    <Button
+                        sx={{ mr: 2, whiteSpace: "nowrap" }}
+                        onClick={() => {
                             window.location.href = "/login"
                         }
                         }>ログイン</Button>
-                        <Button onClick={() => {
+                    <Button
+                        sx={{ mr: 2, whiteSpace: "nowrap" }}
+                        onClick={() => {
                             window.location.href = "/register"
                         }
                         }
-                        >新規登録</Button>
-                    </>
+                    >新規登録</Button>
                 </Toolbar>
             </AppBar>
         </Box>

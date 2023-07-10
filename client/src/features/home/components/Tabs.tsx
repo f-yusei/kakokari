@@ -54,7 +54,7 @@ export default function Tabs() {
                 </MultiTab>
             </Box>
             <CustomTabPanel value={value} index={0} >
-                <Box sx={{ display: 'flex', gap: '1', flexWrap: 'wrap' }}>
+                <Box sx={{ display: 'flex', alignContent: "space-between", gap: '1', flexWrap: 'wrap' }}>
                     <Recommend />
                     <Recommend />
                     <Recommend />

@@ -4,16 +4,16 @@ import { randomEmoji } from '../../../assets/RandomEmoji'
 
 const Recommend = () => {
     return (
-        <Card sx={{ width: "15.0rem", m: 3, borderRadius: "10%" }}>
+        <Card sx={{ maxWidth: "8rem", m: 2, borderRadius: "5%" }}>
             <Typography sx={{ bgcolor: '#de403e', textAlign: "center", fontSize: "4.0rem" }}>
                 {randomEmoji()}
             </Typography>
             <CardContent>
                 <Typography gutterBottom variant='h5' component='div'>
-                    test
+                    2I期末
                 </Typography>
                 <Typography variant='body2' color="text.secondary">
-                    test
+                    国語
                 </Typography>
             </CardContent>
             <CardActions>
