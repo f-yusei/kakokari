@@ -9,7 +9,7 @@ import { red, pink } from '@mui/material/colors';
 import MailRegisterForm from './features/auth/components/MailRegisterForm';
 import MailLoginForm from './features/auth/components/MailLoginForm';
 import MainLayout from './components/layout/MainLayout';
-import Home from './components/layout/Home';
+import Home from './features/home/components/Home';
 import CommonAppBar from './components/common/AppBar';
 
 function App() {
