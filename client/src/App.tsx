@@ -11,6 +11,7 @@ import MailLoginForm from './features/auth/components/MailLoginForm';
 import MainLayout from './components/layout/MainLayout';
 import Home from './features/home/components/Home';
 import CommonAppBar from './components/common/AppBar';
+import Footer from './components/common/Footer';
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
             <Route index element={<Home />} />
           </Route>
         </Routes>
+        <Footer />
       </BrowserRouter >
     </ThemeProvider>
   );
