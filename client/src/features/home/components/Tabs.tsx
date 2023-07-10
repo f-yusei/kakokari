@@ -53,8 +53,15 @@ export default function Tabs() {
                     <Tab label="ピックアップ" {...a11yProps(2)} />
                 </MultiTab>
             </Box>
-            <CustomTabPanel value={value} index={0}>
-                <Recommend />
+            <CustomTabPanel value={value} index={0} >
+                <Box sx={{ display: 'flex', gap: '1', flexWrap: 'wrap' }}>
+                    <Recommend />
+                    <Recommend />
+                    <Recommend />
+                    <Recommend />
+                    <Recommend />
+                    <Recommend />
+                </Box>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
                 マイリスト
