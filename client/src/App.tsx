@@ -12,6 +12,7 @@ import MainLayout from './components/layout/MainLayout';
 import Home from './features/home/components/Home';
 import CommonAppBar from './components/common/AppBar';
 import Footer from './components/common/Footer';
+import PostForm from './features/post/components/PostForm';
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
           </Route>
           <Route path='/' element={<MainLayout />}>
             <Route index element={<Home />} />
+            <Route path="post" element={<PostForm />} />
           </Route>
         </Routes>
         <Footer />
