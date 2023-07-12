@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
-const pastExamSchema = new mongoose.Schema({
+const userProductSchema = new mongoose.Schema({
     seller: {
         type: Schema.Types.ObjectId,
         ref: "User",
@@ -41,4 +41,4 @@ const pastExamSchema = new mongoose.Schema({
     timestamps: true,  // createdAtとupdatedAtを自動的に管理
 });
 
-module.exports = mongoose.model("PastExam", pastExamSchema);
+module.exports = mongoose.model("UserProduct", userProductSchema);

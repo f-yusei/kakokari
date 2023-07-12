@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
 router.use("/auth", require("./auth"));
-router.use("/exam", require("./exam"));
+router.use("/post", require("./post"));
 
 module.exports = router;

@@ -1,8 +1,8 @@
 import express, { Request, Response } from 'express';
-const PastExam = require("../models/pastExam");
+const UserProduct = require("../models/userProduct");
 import { Document } from 'mongoose';
 
-interface IPastExam extends Document {
+interface IUserProduct extends Document {
     seller: string;
     title: string;
     grade: number;
@@ -22,9 +22,9 @@ interface IRequest extends Request {
     };
 }
 
-exports.create = async (req: IRequest, res: Response) => {
+exports.exhibit = async (req: IRequest, res: Response) => {
     try {
-        const pastExam: IPastExam = await PastExam.create({
+        const userProduct: IUserProduct = await UserProduct.create({
             seller: req.user._id,
             title: req.body.title,
             grade: req.body.grade,
@@ -34,7 +34,7 @@ exports.create = async (req: IRequest, res: Response) => {
             semester: req.body.semester,
             description: req.body.description,
         });
-        return res.status(200).json({ pastExam });
+        return res.status(200).json({ userProduct });
     } catch (err) {
         return res.status(500).json(err);
     }
