@@ -12,8 +12,8 @@ import MainLayout from './components/layout/MainLayout';
 import Home from './features/home/components/Home';
 import CommonAppBar from './components/common/AppBar';
 import Footer from './components/common/Footer';
-import PostForm from './features/post/components/PostForm';
-import SuccessPost from './features/post/components/SuccessPost';
+import PostForm from './features/products/components/PostForm';
+import SuccessPost from './features/products/components/SuccessPost';
 
 function App() {
 

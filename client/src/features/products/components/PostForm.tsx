@@ -2,7 +2,7 @@ import { Button, Box, TextField, Select, MenuItem, FormHelperText, InputLabel, }
 import { useNavigate, Link } from 'react-router-dom'
 import { LoadingButton } from '@mui/lab';
 import React, { FC } from 'react';
-import postApi from '../api/postAPI';
+import productsApi from '../api/products';
 
 
 
@@ -87,7 +87,7 @@ const PostForm: FC = () => {
         setLoading(true);
         //登録APIを叩く
         try {
-            const res = await postApi.post({
+            const res = await productsApi.post({
                 title,
                 grade,
                 department,
