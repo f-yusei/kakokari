@@ -4,12 +4,12 @@ import dotenv from 'dotenv';
 const userProductController = require("../controllers/userProduct");
 import { body } from 'express-validator';
 const validation = require("../handlers/validation");
-
+const verifyToken = require("../handlers/tokenHandler");
 dotenv.config()
 
 //過去問を出品するAPI
 router.post(
-    "/product",
+    "/exhibit",
     body("title")
         .isLength({ min: 1 })
         .withMessage("タイトルを入力してください。"),
@@ -35,5 +35,19 @@ router.post(
     verifyToken.verifyToken,
     userProductController.exhibit
 );
+
+//過去問を全て取得するAPI
+router.get(
+    "/getAllProducts",
+    userProductController.getAllProducts
+);
+
+//ログインユーザーの出品した過去問を取得するAPI
+router.get(
+    "/getLoginUserProducts",
+    verifyToken.verifyToken,
+    userProductController.getAllProducts
+);
+
 
 module.exports = router;

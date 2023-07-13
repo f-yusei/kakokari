@@ -43,7 +43,18 @@ exports.exhibit = async (req: IRequest, res: Response) => {
         return res.status(500).json(err);
     }
 };
+
 exports.getAllProducts = async (req: IRequest, res: Response) => {
+    try {
+        const userProducts: IUserProduct[] = await UserProduct.find().sort({ createdAt: -1 });
+        return res.status(200).json({ userProducts });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json(err);
+    };
+};
+
+exports.getLoginUserProducts = async (req: IRequest, res: Response) => {
     try {
         const userProducts: IUserProduct[] = await UserProduct.find({ seller: req.user?._id }).sort({ createdAt: -1 });
         return res.status(200).json({ userProducts });

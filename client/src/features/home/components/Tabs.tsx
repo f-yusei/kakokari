@@ -1,8 +1,10 @@
 import { Box, Tab, Typography } from '@mui/material'
 import MultiTab from '@mui/material/Tabs';
-import React from 'react'
-import { randomEmoji } from '../../../assets/RandomEmoji';
+import React, { useEffect } from 'react'
 import Recommend from './Recommend';
+import productsApi from '../../products/api/products';
+import { useDispatch, useSelector } from 'react-redux';
+import { setProduct } from '../../../redux/features/productSlice';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -39,6 +41,21 @@ function a11yProps(index: number) {
 
 export default function Tabs() {
     const [value, setValue] = React.useState(0);
+    const dispatch = useDispatch();
+    const products = useSelector((state: any) => state.product.value);
+
+    useEffect(() => {
+        const getProducts = async () => {
+            try {
+                const res = await productsApi.getAllProducts();
+                const products = res.data.userProducts;
+                dispatch(setProduct(products));
+            } catch (err) {
+                alert(err);
+            }
+        };
+        getProducts()
+    }, [dispatch])
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
@@ -55,12 +72,9 @@ export default function Tabs() {
             </Box>
             <CustomTabPanel value={value} index={0} >
                 <Box sx={{ display: 'flex', alignContent: "space-between", gap: '1', flexWrap: 'wrap' }}>
-                    <Recommend />
-                    <Recommend />
-                    <Recommend />
-                    <Recommend />
-                    <Recommend />
-                    <Recommend />
+                    {products.length > 0 && products.map((product: any) => (
+                        <Recommend key={product._id} product={product} />
+                    ))}
                 </Box>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
