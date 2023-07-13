@@ -13,6 +13,7 @@ import Home from './features/home/components/Home';
 import CommonAppBar from './components/common/AppBar';
 import Footer from './components/common/Footer';
 import PostForm from './features/post/components/PostForm';
+import SuccessPost from './features/post/components/SuccessPost';
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
           <Route path='/' element={<MainLayout />}>
             <Route index element={<Home />} />
             <Route path="post" element={<PostForm />} />
+            <Route path="success-post" element={<SuccessPost />} />
           </Route>
         </Routes>
         <Footer />
