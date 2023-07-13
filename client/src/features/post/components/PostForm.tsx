@@ -9,7 +9,7 @@ import postApi from '../api/postAPI';
 
 
 const PostForm: FC = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const [titleErrText, setTitleErrText] = React.useState<string>('')
     const [gradeErrText, setGradeErrText] = React.useState<string>('')
@@ -17,7 +17,7 @@ const PostForm: FC = () => {
     const [subjectErrText, setSubjectErrText] = React.useState<string>('')
     const [yearErrText, setYearErrText] = React.useState<string>('')
     const [semesterErrText, setSemesterErrText] = React.useState<string>('')
-    const [discriptionErrText, setDiscriptionErrText] = React.useState<string>('')
+    const [descriptionErrText, setDescriptionErrText] = React.useState<string>('')
 
     const [loading, setLoading] = React.useState<boolean>(false)
 
@@ -29,18 +29,18 @@ const PostForm: FC = () => {
         setSubjectErrText('');
         setYearErrText('');
         setSemesterErrText('');
-        setDiscriptionErrText('');
+        setDescriptionErrText('');
 
         //フォームの値を取得
         const data = await new FormData(e.currentTarget);
         console.log(data)
         const title = (data.get('title') as string).trim();
-        const grade = (data.get('grade') as string).trim();
-        const department = (data.get('department') as string).trim();
+        const grade = data.get('grade');
+        const department = (data.get('department') as string);
         const subject = (data.get('subject') as string).trim();
-        const year = (data.get('year') as string).trim();
-        const semester = (data.get('semester') as string).trim();
-        const discription = (data.get('discription') as string).trim();
+        const year = (data.get('year') as string);
+        const semester = (data.get('semester') as string);
+        const description = (data.get('description') as string);
 
         console.log(title)
         console.log(grade)
@@ -48,7 +48,7 @@ const PostForm: FC = () => {
         console.log(subject)
         console.log(year)
         console.log(semester)
-        console.log(discription)
+        console.log(description)
 
         let error = false;
 
@@ -76,9 +76,9 @@ const PostForm: FC = () => {
             error = true;
             setSemesterErrText('学期を入力してください')
         }
-        if (discription === '') {
+        if (description === '') {
             error = true;
-            setDiscriptionErrText('説明を入力してください')
+            setDescriptionErrText('説明を入力してください')
         }
         if (error) {
             return;
@@ -94,13 +94,12 @@ const PostForm: FC = () => {
                 subject,
                 year,
                 semester,
-                discription,
+                description,
             });
             setLoading(false);
             console.log(res)
             console.log("投稿成功！")
-            navigate('/')
-
+            navigate('/success-post')
         } catch (err: any) {
             console.log(err)
             const errors = err.data.error;
@@ -125,8 +124,8 @@ const PostForm: FC = () => {
                     if (error.path === 'semester') {
                         setSemesterErrText(error.msg);
                     }
-                    if (error.path === 'discription') {
-                        setDiscriptionErrText(error.msg);
+                    if (error.path === 'description') {
+                        setDescriptionErrText(error.msg);
                     }
                 })
             }
@@ -155,16 +154,16 @@ const PostForm: FC = () => {
                     label="学年"
                     fullWidth
                     name='grade'
-                    defaultValue="1年"
+                    defaultValue={1}
                     required
                     error={gradeErrText !== ''}
                     disabled={loading}
                 >
-                    <MenuItem value="1年">1年</MenuItem>
-                    <MenuItem value="2年">2年</MenuItem>
-                    <MenuItem value="3年">3年</MenuItem>
-                    <MenuItem value="4年">4年</MenuItem>
-                    <MenuItem value="5年">5年</MenuItem>
+                    <MenuItem value={1}>1年</MenuItem>
+                    <MenuItem value={2}>2年</MenuItem>
+                    <MenuItem value={3}>3年</MenuItem>
+                    <MenuItem value={4}>4年</MenuItem>
+                    <MenuItem value={5}>5年</MenuItem>
                 </Select>
                 <FormHelperText>※学年は1年、2年、3年、4年、5年のいずれかを選択してください</FormHelperText>
                 <Select
@@ -202,17 +201,16 @@ const PostForm: FC = () => {
                     label="年度"
                     fullWidth
                     name='year'
-                    type='text'
-                    defaultValue="2023年度"
+                    defaultValue={2023}
                     required
                     error={yearErrText !== ''}
                     disabled={loading}
                 >
-                    <MenuItem value="2023年度">2023年度</MenuItem>
-                    <MenuItem value="2022年度">2022年度</MenuItem>
-                    <MenuItem value="2021年度">2021年度</MenuItem>
-                    <MenuItem value="2020年度">2020年度</MenuItem>
-                    <MenuItem value="2019年度">2019年度</MenuItem>
+                    <MenuItem value={2023}>2023年度</MenuItem>
+                    <MenuItem value={2022}>2022年度</MenuItem>
+                    <MenuItem value={2021}>2021年度</MenuItem>
+                    <MenuItem value={2020}>2020年度</MenuItem>
+                    <MenuItem value={2019}>2019年度</MenuItem>
                 </Select>
                 <FormHelperText>※年度は2023年度、2022年度、2021年度、2020年度、2019年度のいずれかを選択してください</FormHelperText>
                 <Select
@@ -233,19 +231,19 @@ const PostForm: FC = () => {
                 </Select>
                 <FormHelperText>※学期は前期中間、前期期末、後期中間、後期期末のいずれかを選択してください</FormHelperText>
                 <TextField
-                    id='discription'
+                    id='description'
                     label="説明"
                     fullWidth
                     margin='normal'
-                    name='discription'
-                    defaultValue="あああ"
+                    name='description'
+                    defaultValue="商品の説明を入力してください"
                     type='text'
                     multiline
                     rows={8}
                     required
                     InputLabelProps={{ shrink: true }}
-                    helperText={discriptionErrText}
-                    error={discriptionErrText !== ''}
+                    helperText={descriptionErrText}
+                    error={descriptionErrText !== ''}
                     disabled={loading}
                 />
                 <LoadingButton

@@ -17,13 +17,16 @@ interface IUserProduct extends Document {
 
 
 interface IRequest extends Request {
-    user: {
+    user?: {
         _id: string;
     };
 }
 
 exports.exhibit = async (req: IRequest, res: Response) => {
     try {
+        if (!req.user) {
+            return res.status(401).json("権限がありません")
+        }
         const userProduct: IUserProduct = await UserProduct.create({
             seller: req.user._id,
             title: req.body.title,
@@ -36,6 +39,16 @@ exports.exhibit = async (req: IRequest, res: Response) => {
         });
         return res.status(200).json({ userProduct });
     } catch (err) {
+        console.log(err);
+        return res.status(500).json(err);
+    }
+};
+exports.getAllProducts = async (req: IRequest, res: Response) => {
+    try {
+        const userProducts: IUserProduct[] = await UserProduct.find({ seller: req.user?._id }).sort({ createdAt: -1 });
+        return res.status(200).json({ userProducts });
+    } catch (err) {
+        console.log(err);
         return res.status(500).json(err);
     }
 };

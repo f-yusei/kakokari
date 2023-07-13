@@ -32,6 +32,7 @@ router.post(
         .isLength({ min: 1 })
         .withMessage("説明を入力してください。"),
     validation.validate,
+    verifyToken.verifyToken,
     userProductController.exhibit
 );
 
