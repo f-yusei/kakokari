@@ -63,3 +63,19 @@ exports.getLoginUserProducts = async (req: IRequest, res: Response) => {
         return res.status(500).json(err);
     }
 };
+
+exports.getOneProduct = async (req: IRequest, res: Response) => {
+    const { productId } = req.params;
+    try {
+        const product = UserProduct.findOne({
+            _id: productId
+        })
+        if (!product) {
+            return res.status(404).json("存在しない過去問です")
+        }
+        return res.status(200).json(product);
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json(err);
+    }
+}

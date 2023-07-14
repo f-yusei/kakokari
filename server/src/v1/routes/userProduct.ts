@@ -49,5 +49,10 @@ router.get(
     userProductController.getAllProducts
 );
 
+//IDの一致する過去問を取得するAPI
+router.get(
+    "/:id",
+    userProductController.getOneProduct
+);
 
 module.exports = router;

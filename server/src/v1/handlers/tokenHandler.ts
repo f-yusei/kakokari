@@ -29,7 +29,6 @@ exports.verifyToken = async (req: any, res: Response, next: NextFunction) => {
             return res.status(401).json("権限がありません")
         }
         req.user = user;
-        console.log(req.query.user)
         next();
     } else {
         return res.status(401).json("権限がありません")
