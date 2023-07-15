@@ -6,12 +6,21 @@ import { Link } from 'react-router-dom'
 const Recommend = (props: any) => {
     const { product } = props;
     return (
-        <Card sx={{ width: "10.0rem", m: 2, borderRadius: "5%" }}>
+        <Card sx={{
+            width: "9.0rem",
+            m: 3,
+            mb: 5,
+            borderRadius: "5%",
+            "@media screen and (max-width: 700px)": {
+                width: "34vw"
+            }
+        }}
+        >
             <Typography sx={{ bgcolor: '#de403e', textAlign: "center", fontSize: "4.0rem" }}>
                 {randomEmoji()}
             </Typography>
             <CardContent>
-                <Typography gutterBottom variant='h5' component='div'>
+                <Typography gutterBottom variant='body1' component='div'>
                     {product.title}
                 </Typography>
                 <Typography variant='body2' color="text.secondary">

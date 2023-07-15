@@ -11,8 +11,9 @@ dotenv.config()
 router.post(
     "/exhibit",
     body("title")
-        .isLength({ min: 1 })
-        .withMessage("タイトルを入力してください。"),
+        .isLength({ min: 1, max: 15 })
+        .withMessage("タイトルを15文字以内で入力してください。"),
+
     body("grade")
         .isLength({ min: 1 })
         .withMessage("学年を入力してください。"),
@@ -20,8 +21,8 @@ router.post(
         .isLength({ min: 1 })
         .withMessage("学科を入力してください。"),
     body("subject")
-        .isLength({ min: 1 })
-        .withMessage("科目を入力してください。"),
+        .isLength({ min: 1, max: 10 })
+        .withMessage("教科を10文字以内で入力してください。"),
     body("year")
         .isLength({ min: 1 })
         .withMessage("年度を入力してください。"),
