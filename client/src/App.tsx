@@ -14,6 +14,7 @@ import CommonAppBar from './components/common/AppBar';
 import Footer from './components/common/Footer';
 import PostForm from './features/products/components/PostForm';
 import SuccessPost from './features/products/components/SuccessPost';
+import ProductDetail from './features/products/components/ProductDetail';
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="post" element={<PostForm />} />
             <Route path="success-post" element={<SuccessPost />} />
+            <Route path="products/:id" element={<ProductDetail />} />
           </Route>
         </Routes>
         <Footer />

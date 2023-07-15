@@ -65,11 +65,9 @@ exports.getLoginUserProducts = async (req: IRequest, res: Response) => {
 };
 
 exports.getOneProduct = async (req: IRequest, res: Response) => {
-    const { productId } = req.params;
+    const { id } = req.params;
     try {
-        const product = UserProduct.findOne({
-            _id: productId
-        })
+        const product = await UserProduct.findById(id);
         if (!product) {
             return res.status(404).json("存在しない過去問です")
         }
